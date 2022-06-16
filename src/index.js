@@ -1,17 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+// import ReactDOM  from 'react-dom/client'; // react 18v 
+import ReactDOM  from 'react-dom'; // react 16v
+import AppHeader from './components/app-header';
+import SearcPanel from './components/search-panel';
+import TodoList from './components/todo-list';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const App = () => {
+  return (
+  <div>
+   <AppHeader />
+    <SearcPanel />
+    <TodoList />
+  </div>
+  )
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// render in react 18v
+// const container = document.getElementById('root')
+// ReactDOM.createRoot(container).render(el);
+// render in react 16v 
+ReactDOM.render(<App />, document.getElementById('root'))
