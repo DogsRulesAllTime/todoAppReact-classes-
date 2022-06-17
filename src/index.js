@@ -7,16 +7,16 @@ import TodoList from './components/todo-list';
 //test git branches 
 const App = () => {
   const todoData = [
-    {label:'Drinc coffee', important: true},
-    {label:'Create React App', important: false},
-    {label:'Fix some life problems', important: true}
+    {label:'Drink coffee', important: true, key: 1},
+    {label:'Create React App', important: false, key: 2},
+    {label:'Fix some life problems', important: true, key: 3}
   ]
 
   return (
   <div>
    <AppHeader />
     <SearcPanel />
-    <TodoList todoData ={todoData}/>
+    <TodoList todoData={todoData}/>
   </div>
   )
 }

@@ -3,11 +3,14 @@ import TodoListItem from "./todo-list-item";
 
 const TodoList = ({todoData}) =>{
   const elements = todoData.map((element) =>{
+    const {key, ...elemProps} = element; //указав свойство отдельно, оно не войдет в СПРЕД
     return (
-      <li><TodoListItem {...element}/></li>
+      <li key={key}>
+        <TodoListItem {...elemProps} />
+      </li>
     )
   })  
-  return(
+  return(  
       <ul>
         {elements}
     </ul>
