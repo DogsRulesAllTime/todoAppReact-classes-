@@ -6,11 +6,17 @@ import SearcPanel from './components/search-panel';
 import TodoList from './components/todo-list';
 //test git branches 
 const App = () => {
+  const todoData = [
+    {label:'Drinc coffee', important: true},
+    {label:'Create React App', important: false},
+    {label:'Fix some life problems', important: true}
+  ]
+
   return (
   <div>
    <AppHeader />
     <SearcPanel />
-    <TodoList />
+    <TodoList todoData ={todoData}/>
   </div>
   )
 }
