@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import TodoListItem from "../todo-list-item";
 import './todo-list.css'
 
-const TodoList = ({todoData, onDeleted, addThis, onTogleDone, onTogleImp}) =>{    //передаем функцию из APP
+const TodoList = ({todoData, onDeleted, addThis, onTogleDone, onTogleImp, actualDataFunc}) =>{   
+  console.log(todoData); //передаем функцию из APP
   const elements = todoData.map((element) =>{
     const {key, ...elemProps} = element; //указав свойство отдельно, оно не войдет в СПРЕД
     return (
@@ -30,6 +31,18 @@ const TodoList = ({todoData, onDeleted, addThis, onTogleDone, onTogleImp}) =>{  
     formValue ? addThis(formValue) || clearInput('addInput') : alert('empty value') 
   }
 
+  const [val, setVal] = useState('startPoint')
+  const onSpan = (e) =>{
+    setVal (e.target.value)
+    }
+  const [status, setStatus] = useState(true)
+  let classNameTest = 'testStateHook'
+  let btnMsg = 'Hide'
+  if (status){
+    classNameTest += ' none'
+    btnMsg = 'Show'
+  } 
+  
   return(  
     <div>
       <ul className="list-group todo-list">
@@ -44,8 +57,19 @@ const TodoList = ({todoData, onDeleted, addThis, onTogleDone, onTogleImp}) =>{  
       <button 
         type='submit' // or empty type
         className="btn btn-warning"
-        id="addBtn">ADD</button>
+        id="addBtn"
+        onClick={actualDataFunc}>ADD</button>
     </form>
+    <button
+    onClick={()=>setStatus(!status)}>{`TEST FOR STATE HOOK ${btnMsg}`}</button>
+    <div className={classNameTest}>
+    <input
+      className="form-control" 
+      type='text'
+      onChange={(e) =>onSpan(e)}></input>
+      <span
+      className="spanOnChange">{val}</span>
+      </div>
     </div>
     )
   }

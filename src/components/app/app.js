@@ -14,8 +14,49 @@ export default class App extends Component {
       {label:'Drink coffee', important: false, done: false ,key: 1},
       {label:'Create React App', important: false, done: false, key: 2},
       {label:'Fix some life problems', important: true, done: false, key: 3}
-    ]  
+    ],
+    actData:[]  
   }
+  //  tempData = []
+  serchEngine =(val) =>{
+    let actualData = {...this.state}
+    if (val){
+      console.log('not empty');
+      let checkData = this.state.todoData.filter((i)=> i.label.includes(val))
+      if (checkData.length > 0){
+        actualData = checkData
+    }
+    console.log(actualData);
+
+    return actualData;
+  }
+}
+  
+
+  // actualDataFunc = (filterData) =>{
+  //   let actualData = {...this.state}
+  //   if (filterData){
+  //     console.log('not empty');
+  //   }
+  //   console.log(actualData);
+
+  //   return actualData;
+  // }
+  
+    
+  //   // this.setState(({todoData}) =>{
+  //     let data = {...this.state.todoData}
+  //     data = this.state.todoData.filter((i)=> i.label.includes(val))
+  //     console.log(data.length);
+  //     console.log(data);
+  //     console.log(this.state.todoData);
+  //     if (data.length > 0){
+  //         this.tempData = [data]
+ 
+    // const data = this.state.todoData.filter((i)=> i.label.includes(val))
+    // }
+  
+
   togleProp(arr, id, propName){
     const idx = arr.findIndex(el =>el.key === id);
     const oldItem = arr[idx]
@@ -104,18 +145,20 @@ export default class App extends Component {
 
     })
   }
-
+  
   render() {
     
     return (
     <div className="todo-app">
      <AppHeader todoData={this.state.todoData}/>
      <div className='top-panel d-flex'>
-      <SearcPanel />
+      <SearcPanel 
+      serchEngine={this.serchEngine}/>
       <ItemStatusFilter />
       </div>
       <TodoList 
         todoData={this.state.todoData}
+        actualDataFunc={this.actualDataFunc}
         onDeleted = {this.deleteItem}
         addThis = {this.addItem}
         onTogleDone = {this.onTogleDone}
