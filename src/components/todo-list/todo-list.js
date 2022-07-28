@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import TodoListItem from "../todo-list-item";
 import './todo-list.css'
 
-const TodoList = ({todoData, onDeleted, addThis, onTogleDone, onTogleImp, actualDataFunc}) =>{   
-  console.log(todoData); //передаем функцию из APP
+const TodoList = ({todoData, onDeleted, addThis, onTogleDone, onTogleImp}) =>{   
+  // console.log(todoData); //передаем функцию из APP
   const elements = todoData.map((element) =>{
     const {key, ...elemProps} = element; //указав свойство отдельно, оно не войдет в СПРЕД
     return (
@@ -57,8 +57,7 @@ const TodoList = ({todoData, onDeleted, addThis, onTogleDone, onTogleImp, actual
       <button 
         type='submit' // or empty type
         className="btn btn-warning"
-        id="addBtn"
-        onClick={actualDataFunc}>ADD</button>
+        id="addBtn">ADD</button>
     </form>
     <button
     onClick={()=>setStatus(!status)}>{`TEST FOR STATE HOOK ${btnMsg}`}</button>
