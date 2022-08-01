@@ -15,7 +15,41 @@ export default class App extends Component {
       { label: "Fix some life problems", important: true, done: false, key: 3 },
     ],
     searchValue: "",
+    statusValue: "",
+    status: [
+      {label: "ALL", stat: true, key: 1},
+      {label: "Active", stat: false, key: 2},
+      {label: "Done", stat: false, key: 3}
+    ]
   };
+
+
+
+
+  statusValue = (val) =>{
+    this.setState((statusValue) => {
+      return {
+        statusValue: val,
+      };
+    });
+
+  }
+  statusSelect = (statusValue, status) =>{
+    let actualList = [...status]
+    const newData = actualList.map((elem) => { 
+      if (elem.label === statusValue) {
+        elem.stat = true
+      } else {
+        elem.stat = false
+      }
+      return elem
+      // console.log(elem);
+    })
+    return newData
+  }
+
+
+
 
   serchEngine = (val) => {
     this.setState((searchValue) => {
@@ -121,19 +155,29 @@ export default class App extends Component {
   };
 
   render() {
-    const { todoData, searchValue } = this.state;
+    const { todoData, searchValue , statusValue, status} = this.state;
 
     const actualData = this.dataFunc(todoData, searchValue);
 
-    console.log(this.state.todoData);
-    console.log(actualData);
+    // console.log(this.state.todoData);
+    // console.log(actualData);
+
+    const testData = this.statusSelect (statusValue, status)
+    
+    // console.log(status);
+    // console.log(testData);
+
+
 
     return (
       <div className="todo-app">
         <AppHeader todoData={this.state.todoData} />
         <div className="top-panel d-flex">
           <SearcPanel serchEngine={this.serchEngine} />
-          <ItemStatusFilter />
+          <ItemStatusFilter 
+          status ={testData}
+          statusValue = {this.statusValue}
+          />
         </div>
         <TodoList
           todoData={actualData}
