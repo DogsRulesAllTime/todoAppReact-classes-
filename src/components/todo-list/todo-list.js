@@ -5,6 +5,7 @@ import './todo-list.css'
 const TodoList = ({todoData, onDeleted, addThis, onTogleDone, onTogleImp}) =>{   
   // console.log(todoData); //передаем функцию из APP
   const elements = todoData.map((element) =>{
+    
     const {key, ...elemProps} = element; //указав свойство отдельно, оно не войдет в СПРЕД
     return (
       <li key={key} className='list-group-item'>

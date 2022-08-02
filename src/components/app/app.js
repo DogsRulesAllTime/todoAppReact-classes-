@@ -15,7 +15,7 @@ export default class App extends Component {
       { label: "Fix some life problems", important: true, done: false, key: 3 },
     ],
     searchValue: "",
-    statusValue: "",
+    statusValue: "ALL",
     status: [
       {label: "ALL", stat: true, key: 1},
       {label: "Active", stat: false, key: 2},
@@ -43,10 +43,33 @@ export default class App extends Component {
         elem.stat = false
       }
       return elem
-      // console.log(elem);
     })
+    // actualData.filter((elem) => { 
+    //   // console.log(elem.label, statusValue, elem.stat);
+    //   for (let st of status){
+    //     console.log(st);
+    //   }
+
+      // if ( statusValue === 'Active' && elem.stat === true && actualData.done === false){
+      //   console.log(actualData, 'ok');
+      //   return actualData[0]
+      // }
     return newData
   }
+
+  selectDataByFilterBtn = (statusValue, status , actualData) =>{
+    for (let st of status){
+      if ( statusValue === 'Active' && st.stat === true){
+          return actualData.filter(elem => elem.done === false)
+      } else if (statusValue === 'Done' && st.stat === true){
+        return actualData.filter(elem => elem.done === true)
+        // return 'done'
+      } else if (statusValue === 'ALL' && st.stat === true){
+        return actualData
+        // return 'all'
+      }
+  }
+}
 
 
 
@@ -80,6 +103,8 @@ export default class App extends Component {
     //2. new array
     return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
   }
+  keyVal = 100
+
   addItem = (val) => {
     console.log(val);
     this.setState(({ todoData }) => {
@@ -92,7 +117,7 @@ export default class App extends Component {
         label: val,
         important: false,
         done: false,
-        key: todoData.length + 1,
+        key: this.keyVal += 1,
       };
       const newData = [...todoData, newItem];
 
@@ -162,10 +187,15 @@ export default class App extends Component {
     // console.log(this.state.todoData);
     // console.log(actualData);
 
-    const testData = this.statusSelect (statusValue, status)
+    const testData = this.statusSelect (statusValue, status, actualData)
     
-    // console.log(status);
-    // console.log(testData);
+    console.log(testData);
+
+    const inputData = this.selectDataByFilterBtn(statusValue, testData, actualData)
+
+    console.log('++++++++');
+    console.log(inputData);
+    console.log('++++++++');
 
 
 
@@ -180,7 +210,8 @@ export default class App extends Component {
           />
         </div>
         <TodoList
-          todoData={actualData}
+          // todoData={actualData}
+          todoData={inputData}
           onDeleted={this.deleteItem}
           addThis={this.addItem}
           onTogleDone={this.onTogleDone}
