@@ -3,11 +3,11 @@ import './search-panel.css'
 
 const SearchPanel = ({serchEngine}) => {
     const searchText = 'type to search';
-    const searchStyle = {
-      fontSize: '2rem',
-      color: 'green',
-      fontWeight: 'bold'
-    }
+    // const searchStyle = {
+    //   fontSize: '2rem',
+    //   color: 'green',
+    //   fontWeight: 'bold'
+    // }
     return (
       <input
       className="form-control search-input" 
